@@ -97,8 +97,13 @@ function generateReview() {
 
 function copyText() {
   let text = document.getElementById("reviewText").innerText;
-  navigator.clipboard.writeText(text);
-  alert("Review copied!");
+
+  navigator.clipboard.writeText(text).then(function() {
+    
+    // Directly open Google review
+    window.open("https://g.page/r/CcN8tmuCb_JtEBM/review", "_blank");
+
+  });
 }
 </script>
 
