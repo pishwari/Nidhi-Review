@@ -1,37 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Nidhi Makeup Studio Review</title>
+  <title>Nidhi Makeup Artist – Lavish Beauty Salon (Alibag)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Analytics (PASTE YOUR ID) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXX');
+  </script>
+
   <style>
     body {
-      font-family: Arial;
+      font-family: 'Segoe UI', sans-serif;
+      background: #000;
+      color: #fff;
       text-align: center;
       padding: 20px;
-      background: #fff0f5;
     }
-    h2 { color: #d63384; }
+
+    h2 { color: gold; }
+    h3 { color: #ffcc70; margin-top: 20px; }
+
     button {
-      margin: 8px;
+      margin: 6px;
       padding: 12px;
       border: none;
-      border-radius: 8px;
-      background: #ff69b4;
-      color: white;
-      font-size: 16px;
+      border-radius: 20px;
+      background: linear-gradient(45deg, #d4af37, #ffcc70);
+      color: black;
+      font-weight: bold;
     }
+
+    .selected {
+      background: gold !important;
+    }
+
     .box {
       margin-top: 20px;
       padding: 15px;
-      background: white;
-      border-radius: 10px;
+      background: #111;
+      border-radius: 15px;
+      border: 1px solid gold;
     }
   </style>
 </head>
 
 <body>
 
-<h2>💖 Nidhi Makeup Studio, Alibag</h2>
+<h2>Nidhi Makeup Artist</h2>
+<p>Lavish Beauty Salon, Alibag 💄</p>
+
 <p>Select options & get your review instantly 😊</p>
 
 <h3>⭐ Rate Experience</h3>
@@ -39,31 +61,34 @@
 <button onclick="setRating('great')">⭐⭐⭐⭐</button>
 <button onclick="setRating('good')">⭐⭐⭐</button>
 
-<h3>💄 Service</h3>
+<h3>💄 Makeup Services</h3>
 <button onclick="setService('bridal makeup')">Bridal</button>
 <button onclick="setService('party makeup')">Party</button>
-<button onclick="setService('facial')">Facial</button>
+<button onclick="setService('engagement makeup')">Engagement</button>
+
+<h3>💇 Salon Services</h3>
+<button onclick="setService('facial service')">Facial</button>
 <button onclick="setService('hair styling')">Hair</button>
+<button onclick="setService('skin care treatment')">Skin Care</button>
 
 <h3>👍 What did you like?</h3>
-<button onclick="addFeature('friendly staff')">Friendly</button>
-<button onclick="addFeature('clean salon')">Clean</button>
-<button onclick="addFeature('professional service')">Professional</button>
-<button onclick="addFeature('affordable pricing')">Affordable</button>
+<button onclick="toggleFeature(this,'friendly staff')">Friendly</button>
+<button onclick="toggleFeature(this,'clean and hygienic salon')">Clean</button>
+<button onclick="toggleFeature(this,'professional service')">Professional</button>
+<button onclick="toggleFeature(this,'affordable pricing')">Affordable</button>
+<button onclick="toggleFeature(this,'amazing results')">Results</button>
 
 <div class="box">
   <h3>📝 Your Review</h3>
   <p id="reviewText">Your review will appear here...</p>
 
-  <button onclick="copyText()">📋 Copy Review</button><br><br>
+  <p style="color:#aaa;">👉 Copy → Paste on Google → Post</p>
 
-  <a href="https://g.page/r/CcN8tmuCb_JtEBM/review" target="_blank">
-    <button>⭐ Post on Google</button>
-  </a>
+  <button onclick="copyText()">📋 Copy & Post Review</button>
 </div>
 
 <script>
-let rating = "";
+let rating = "amazing"; // default 5 star
 let service = "";
 let features = [];
 
@@ -77,32 +102,58 @@ function setService(s) {
   generateReview();
 }
 
-function addFeature(f) {
-  features.push(f);
+function toggleFeature(btn, f) {
+  if(features.includes(f)){
+    features = features.filter(x => x !== f);
+    btn.classList.remove("selected");
+  } else {
+    features.push(f);
+    btn.classList.add("selected");
+  }
   generateReview();
 }
 
 function generateReview() {
   let featureText = features.join(", ");
 
-  let review = "I had an " + rating + " experience at Nidhi Makeup Studio, Alibag. ";
+  let endings = [
+    "Highly recommended!",
+    "Best salon in Alibag!",
+    "Top-rated makeup artist near me!",
+    "Must visit salon in Alibag!"
+  ];
+
+  let randomEnding = endings[Math.floor(Math.random() * endings.length)];
+
+  let review = "I had an " + rating + " experience at Nidhi Makeup Artist – Lavish Beauty Salon in Alibag. ";
 
   if(service) review += "The " + service + " service was excellent. ";
   if(featureText) review += "I really liked the " + featureText + ". ";
 
-  review += "Highly recommended for makeup services in Alibag!";
+  review += "If you are searching for the best makeup artist near me or salon near me in Alibag, this is highly recommended! ";
+
+  review += randomEnding;
 
   document.getElementById("reviewText").innerText = review;
 }
 
 function copyText() {
+  if(!service){
+    alert("Please select service");
+    return;
+  }
+
   let text = document.getElementById("reviewText").innerText;
 
   navigator.clipboard.writeText(text).then(function() {
-    
-    // Directly open Google review
-    window.open("https://g.page/r/CcN8tmuCb_JtEBM/review", "_blank");
 
+    // Track click
+    if(typeof gtag !== "undefined"){
+      gtag('event', 'copy_review_clicked');
+    }
+
+    // Open Google Review
+    window.open("https://g.page/r/CcN8tmuCb_JtEBM/review", "_blank");
   });
 }
 </script>
