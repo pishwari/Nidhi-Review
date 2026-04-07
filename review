@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nidhi Makeup Studio Review</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      padding: 20px;
+      background: #fff0f5;
+    }
+    h2 { color: #d63384; }
+    button {
+      margin: 8px;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #ff69b4;
+      color: white;
+      font-size: 16px;
+    }
+    .box {
+      margin-top: 20px;
+      padding: 15px;
+      background: white;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h2>💖 Nidhi Makeup Studio, Alibag</h2>
+<p>Select options & get your review instantly 😊</p>
+
+<h3>⭐ Rate Experience</h3>
+<button onclick="setRating('amazing')">⭐⭐⭐⭐⭐</button>
+<button onclick="setRating('great')">⭐⭐⭐⭐</button>
+<button onclick="setRating('good')">⭐⭐⭐</button>
+
+<h3>💄 Service</h3>
+<button onclick="setService('bridal makeup')">Bridal</button>
+<button onclick="setService('party makeup')">Party</button>
+<button onclick="setService('facial')">Facial</button>
+<button onclick="setService('hair styling')">Hair</button>
+
+<h3>👍 What did you like?</h3>
+<button onclick="addFeature('friendly staff')">Friendly</button>
+<button onclick="addFeature('clean salon')">Clean</button>
+<button onclick="addFeature('professional service')">Professional</button>
+<button onclick="addFeature('affordable pricing')">Affordable</button>
+
+<div class="box">
+  <h3>📝 Your Review</h3>
+  <p id="reviewText">Your review will appear here...</p>
+
+  <button onclick="copyText()">📋 Copy Review</button><br><br>
+
+  <a href="https://g.page/r/CcN8tmuCb_JtEBM/review" target="_blank">
+    <button>⭐ Post on Google</button>
+  </a>
+</div>
+
+<script>
+let rating = "";
+let service = "";
+let features = [];
+
+function setRating(r) {
+  rating = r;
+  generateReview();
+}
+
+function setService(s) {
+  service = s;
+  generateReview();
+}
+
+function addFeature(f) {
+  features.push(f);
+  generateReview();
+}
+
+function generateReview() {
+  let featureText = features.join(", ");
+
+  let review = "I had an " + rating + " experience at Nidhi Makeup Studio, Alibag. ";
+
+  if(service) review += "The " + service + " service was excellent. ";
+  if(featureText) review += "I really liked the " + featureText + ". ";
+
+  review += "Highly recommended for makeup services in Alibag!";
+
+  document.getElementById("reviewText").innerText = review;
+}
+
+function copyText() {
+  let text = document.getElementById("reviewText").innerText;
+  navigator.clipboard.writeText(text);
+  alert("Review copied!");
+}
+</script>
+
+</body>
+</html>
